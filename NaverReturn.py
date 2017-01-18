@@ -5,7 +5,13 @@ import urllib
 from urllib import request
 
 # title, link, description 을 뱉는 모듈 만들기
+# <pubDate>Sat, 14 Jan 2017 08:35:00 +0900</pubDate>
+def get_date():
+    pass
 
+    # rescode = getcode 까지 중복되는 부분 모든 함수에서 쓰지 않고 1번만 타이핑할 수 있게 모듈화방법?
+    # 함수 생성전에 위에
+    # pubDate string 으로 안받아짐
 
 def get_title():
     client_id = "YOUR_CLIENT_ID"
@@ -15,7 +21,7 @@ def get_title():
     display = '10'
     start = '1000'
 
-    encText = urllib.parse.quote("안철수 대선")
+    encText = urllib.parse.quote("안철수")
 
     # url = "https://openapi.naver.com/v1/search/blog?query=" + encText # json 결과
     url = "https://openapi.naver.com/v1/search/news.xml?query=" + encText + "&display=" + display + "&start=" + start  # xml 결과
@@ -47,7 +53,7 @@ def get_title():
 
             print(title)
             title_list.append(title)
-            print("list of titles")
+
             print(title_list)
 
 def get_link():
@@ -124,11 +130,10 @@ def get_description():
         description = description.replace('<b>', '')
         description = description.replace('</b>', '')
 
-        print("description list ")
-
-        description_list.append(description)
+    # print("description list ")
+        description_list.append(description)   # add to List
         print(description_list)
-
+#
 def main():
     get_title()
     get_link()
