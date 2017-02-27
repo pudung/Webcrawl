@@ -1,19 +1,40 @@
+
 import requests
 from bs4 import BeautifulSoup
 
-def spider(max_pages):
-    page = 1
-    while page < max_pages:
-        url = 'http://creativeworks.tistory.com/' + str(page)
-        source_code = requests.get(url)
+def spider():
 
-        plain_text = source_code.text
-        soup = BeautifulSoup(plain_text,"html.parser")
-        for title_list in soup.find_all(['h3','class']):
+    url = 'http://www.yonhapnews.co.kr/bulletin/2017/01/25/0200000000AKR20170125098552001.HTML?from=search'
 
-            title = title_list.text
-            print(title)
+    source_code = requests.get(url)
 
-        page += 1
+    # --------------------encoding commit 2017-01-25 ------------------#
 
-spider(100)
+    # plain_text = source_code.text
+    plain_text = source_code.content
+    soup = BeautifulSoup(plain_text, 'html.parser',from_encoding='utf-8')
+
+    # -----------------------parsing---------------------------------#
+
+    # title
+    title = soup.find_all('h1', {'class':'tit-article'})
+    print(title)
+
+    article_chunk = soup.find_all('div', {'class':'article'})
+
+    if len(article_chunk) > 0:
+        article = article_chunk[0].find_all('p')
+
+        for one_article in article:
+            one_article = one_article.get_text()
+            one_article = one_article.replace('</p>','')
+            # 한줄씩 뽑기.
+            print(one_article)
+
+
+
+
+
+spider()
+
+
