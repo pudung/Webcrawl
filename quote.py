@@ -54,6 +54,8 @@ for article_p in soup2.findAll('p',attrs={'class':'blind'}):
 for article_adbox in soup2.findAll('div',attrs={'class':'article-ad-box'}):
     article_adbox.extract()
 
+
+
 # 텍스트만 추출
 article_text = soup2.text
 
