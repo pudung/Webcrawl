@@ -1,5 +1,6 @@
-# 본문 태그 탐색 후 article_text 에 저장
-# example - 중앙일보
+# 2017-03-21
+# created by yeseul
+# commit: regex
 
 import requests, copy, urllib
 from html.parser import HTMLParser
@@ -9,7 +10,8 @@ import re
 
 def doit(text):
 
-  matches = re.findall(r'\“(.+?)\”',text)
+  matches = re.findall(r'\“(.+?)\”',text) or re.findall(r'\"(.+?)\"',text)
+  #matches = re.findall(r'\"(.+?)\"',text)
 
   # matches is now ['String 1', 'String 2', 'String3']
 
