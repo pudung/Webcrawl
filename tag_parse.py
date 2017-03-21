@@ -1,27 +1,29 @@
 # 본문 태그 탐색 후 article_text 에 저장
 # example - 중앙일보
+# created by Kelly 2017-3-21
+# ""도 탐색가능 해야 함
 
 import requests, copy, urllib
 from html.parser import HTMLParser
 from bs4 import BeautifulSoup
 
 
-def findvalue(STRING,aSub,aStart,bSub):
+def find_value(STRING,aSub,aStart,bSub):
 
     '''STRING,aSub,aStart,bSub'''
-    print("1")
+    #print("STRING:",STRING)
     # aStart(위치) 부터 aSub 문자 Searching.
 
     # index A 접근이 안됨 .
 
     indexA = STRING.index(aSub,aStart)+len(aSub)
-    print("1")
+
     # 위에서 aStart부터 찾았으니까 그 이후인 indexA부터 bSub 문자 Searching.
     indexB = STRING.index(bSub,indexA)
-    print("1")
+
     # STRING 에서 aSub에 입력한 문자열과 bSub에 입력한 문자열의 중간 문자열 리턴
     returnvalue = (indexA,indexB+len(bSub),STRING[indexA:indexB].strip())
-    print("1")
+
     # indexA = s, indexB = indexB+len(bSub) = e, v = quote
 
     return returnvalue
@@ -36,7 +38,7 @@ dic = {'중앙일보':'article_body','연합뉴스':'article'}
 tag = dic.get('중앙일보') # value 값 가져오기
 
 # 중앙일보
-url = 'http://news.joins.com/article/21384797?cloc=joongang|section|clickraking'
+url = 'http://news.joins.com/article/21387669'
 
 r = requests.get(url)
 content = r.content
@@ -58,7 +60,6 @@ article_text = HTMLParser().unescape(article_text)
 print(article_text)
 
 # 본문
-
 quotations = list()
 
 # index = 0 부터 searching.
@@ -71,7 +72,7 @@ e = 0
 while True:
     try:
 
-        s,e,v = findvalue(article_text,'"',e,'"')
+        s,e,v = find_value(article_text,'“',e,'”')
 
         # v = STRING[indexA:indexB].strip() "인용구"
 
