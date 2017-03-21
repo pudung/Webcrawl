@@ -13,7 +13,7 @@ def doit(text):
 
   # matches is now ['String 1', 'String 2', 'String3']
 
-  return ",".join(matches)
+  return " // ".join(matches)
 
 
 # match pub - tag using dic
