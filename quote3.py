@@ -11,11 +11,8 @@ import re
 def doit(text):
 
   matches = re.findall(r'\“(.+?)\”',text) or re.findall(r'\"(.+?)\"',text)
-  #matches = re.findall(r'\"(.+?)\"',text)
 
-  # matches is now ['String 1', 'String 2', 'String3']
-
-  return " // ".join(matches)
+  return "\n".join(matches)
 
 
 # match pub - tag using dic
@@ -37,16 +34,15 @@ soup = BeautifulSoup(content,'html.parser')
 
 # 본문들어가있는 태그
 soup2 = soup.find('div', attrs={'class':tag})
-#print("soup2:",soup2)
+
 
 article_text = soup2.text
-#print("article_text:",article_text)
+
 # 공백 최소화 처리
 article_text = ' '.join(article_text.split())
 
 # entiti 문자 처리
 article_text = HTMLParser().unescape(article_text)
-#print(article_text)
 
 
 print(doit(article_text))
